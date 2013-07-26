@@ -16,8 +16,6 @@ options(stringsAsFactors = FALSE)
 query_tx_plans <- function(start_date,
                            stop_date = Sys.Date()) {
 
-    # TODO: argument validation
-
     plus <- connect_to_tbdbplus()
 
     plans <- sqlQuery(plus, paste(

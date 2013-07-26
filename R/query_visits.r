@@ -11,8 +11,6 @@
 query_visits <- function(start_date,
                          stop_date = Sys.Date()) {
 
-    # TODO: argument validation
-
     plus <- connect_to_tbdbplus()
 
     encounters <- sqlQuery(plus, paste(

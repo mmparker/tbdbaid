@@ -29,8 +29,6 @@ query_dhdw_qfts <- function(start_date,
     dhdw <- connect_to_dhdw()
 
     # Pull in the raw QFT records
-    # TODO: limit by dates
-    # TODO: limit by hospital service
     qfts.raw <- sqlQuery(dhdw, "
 
         SELECT med_rec_no AS mrn, 
