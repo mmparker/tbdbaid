@@ -11,7 +11,7 @@ version of R is running}
   is running on.
 }
 \examples{
-plus <- connect_to_tbdbplus()
+plus <- connect_to_dhdw()
 }
 \keyword{database,}
 \keyword{odbc}

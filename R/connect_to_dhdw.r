@@ -12,7 +12,7 @@
 #' @export
 #' 
 #' @examples
-#' plus <- connect_to_tbdbplus()
+#' plus <- connect_to_dhdw()
 
 connect_to_dhdw <- function() {
 
