@@ -9,7 +9,7 @@
 #' including date and result.
 #' 
 #' @param start_date The first Date on which to count patients
-#' @param end_date The last Date on which to count patients
+#' @param stop_date The last Date on which to count patients
 #' 
 #' @return The number of patients seen in the indicated period.
 #' 

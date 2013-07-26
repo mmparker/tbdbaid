@@ -8,7 +8,8 @@
   \item{start_date}{The first Date on which to count
   patients}
 
-  \item{end_date}{The last Date on which to count patients}
+  \item{stop_date}{The last Date on which to count
+  patients}
 }
 \value{
   The number of patients seen in the indicated period.
