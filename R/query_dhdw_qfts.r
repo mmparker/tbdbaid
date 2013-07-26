@@ -67,13 +67,13 @@ query_dhdw_qfts <- function(start_date,
         gsub(x = qfts.raw$res_txt[qfts.raw$result.type %in% 
                  c("nil", "tb", "mito")],
              pattern = "^.*:\\s?(\\S*).*", 
-             replace = "\\1")
+             replacement = "\\1")
 
     # Qualitative results
     qfts.raw$result[qfts.raw$result.type %in% "result"] <- 
         gsub(x = qfts.raw$res_txt[qfts.raw$result.type %in% "result"],
              pattern = "^(\\w*).*$", 
-             replace = "\\1")
+             replacement = "\\1")
 
 
     # Cast wide, excluding duplicate lines
@@ -85,15 +85,15 @@ query_dhdw_qfts <- function(start_date,
     # Convert nil, tb, mito to numeric
     dhdw.qfts$nil.num <- as.numeric(gsub(x = dhdw.qfts$nil,
                                          pattern = ">",
-                                         replace = ""))
+                                         replacement = ""))
 
     dhdw.qfts$tb.num <- as.numeric(gsub(x = dhdw.qfts$tb,
                                         pattern = ">",
-                                        replace = ""))
+                                        replacement = ""))
 
     dhdw.qfts$mito.num <- as.numeric(gsub(x = dhdw.qfts$mito,
                                           pattern = ">",
-                                          replace = ""))
+                                          replacement = ""))
 
 
     # Return those QFTs
