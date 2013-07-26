@@ -23,6 +23,8 @@ query_dhdw_qfts <- function(start_date,
                             end_date,
                             hosp_serv = "TBC") {
 
+    # Initialize these variables to prevent global var warnings from R CMD check
+    result.type <- NULL
 
 
     # Connect to the DHDW

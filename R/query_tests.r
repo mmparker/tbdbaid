@@ -25,6 +25,9 @@
 query_tests <- function(start_date, stop_date = Sys.Date()) {
 
 
+    # Initialize these variables to prevent global var warnings from R CMD check
+    test_date <- NULL
+
     plus <- connect_to_tbdbplus()
 
     tsts <- sqlQuery(plus, paste(
@@ -84,9 +87,8 @@ query_tests <- function(start_date, stop_date = Sys.Date()) {
 
 
     # Subset QFTs by date
-    qfts_datelim <- subset(qfts, 
-                           test_date >= start_date &
-                           test_date <= stop_date)
+    qfts_datelim <- qfts[qfts$test_date >= start_date &
+                         qfts$test_date <= stop_date, ]
 
 
     # Melt it into a single dataset

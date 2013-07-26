@@ -67,9 +67,9 @@ query_actives <- function(start_date, end_date = Sys.Date()) {
 
 
     # Subset to active cases in the requested date range
-    queried_actives <- subset(actives, 
-                              date_id >= start_date &
-                              date_id <= end_date)
+    queried_actives <- actives[actives$date_id >= start_date &
+                               actives$date_id <= end_date, ]
+
 
     queried_actives
 

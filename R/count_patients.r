@@ -86,9 +86,8 @@ count_patients <- function(start_date, end_date) {
     qfts_all$c_date <- as.Date(qfts_all$collection_date, "%m/%d/%Y")
 
     # Subset the QFTs to the report period
-    qfts <- subset(qfts_all, 
-                   c_date >= as.Date(start_date) & c_date <= as.Date(end_date))
-
+    qfts <- qfts_all[qfts_all$c_date >= as.Date(start_date) & 
+                     qfts_all$c_date <= as.Date(end_date), ]
 
 
     # Count the unique patients
