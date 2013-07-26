@@ -21,9 +21,6 @@
 
 count_patients <- function(start_date, end_date) {
 
-    require(RODBC)
-
-
     plus <- connect_to_tbdbplus()
 
     # Get the IDs of every person with a TST, QFT, encounter, or treatment

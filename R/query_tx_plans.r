@@ -18,8 +18,6 @@ query_tx_plans <- function(start_date,
 
     # TODO: argument validation
 
-    require(RODBC)
-
     plus <- connect_to_tbdbplus()
 
     plans <- sqlQuery(plus, paste(

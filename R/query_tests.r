@@ -26,8 +26,6 @@ query_tests <- function(start_date, stop_date = Sys.Date()) {
 
     # TODO: argument validation
 
-    require(RODBC)
-    require(reshape2)
 
     plus <- connect_to_tbdbplus()
 

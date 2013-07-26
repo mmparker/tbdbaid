@@ -6,7 +6,8 @@ License: GPL-3
 Title: 
 Description: 
 Imports:
-    RODBC
+    RODBC,
+    reshape2
 Suggests:
     testthat,
     roxygen2

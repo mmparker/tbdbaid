@@ -13,8 +13,6 @@ query_visits <- function(start_date,
 
     # TODO: argument validation
 
-    require(RODBC)
-
     plus <- connect_to_tbdbplus()
 
     encounters <- sqlQuery(plus, paste(

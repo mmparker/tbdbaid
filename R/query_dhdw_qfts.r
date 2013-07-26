@@ -24,8 +24,6 @@ query_dhdw_qfts <- function(start_date,
                             hosp_serv = "TBC") {
 
 
-    require(RODBC)
-    require(reshape2)
 
     # Connect to the DHDW
     dhdw <- connect_to_dhdw()

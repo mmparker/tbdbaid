@@ -20,8 +20,6 @@ query_actives <- function(start_date, end_date = Sys.Date()) {
 
     # TODO: argument validation
 
-    require(RODBC)
-
     plus <- connect_to_tbdbplus()
 
     actives <- sqlQuery(plus, "
