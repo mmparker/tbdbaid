@@ -5,6 +5,8 @@ Version: 1.0
 License: GPL-3
 Title: 
 Description: 
+Imports:
+    RODBC
 Suggests:
     testthat,
     roxygen2
@@ -16,3 +18,4 @@ Collate:
     'query_tests.r'
     'query_tx_plans.r'
     'query_visits.r'
+    'connect_to_tbdbplus.r'

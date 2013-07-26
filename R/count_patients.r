@@ -22,7 +22,6 @@
 count_patients <- function(start_date, end_date) {
 
     require(RODBC)
-    require(mpmisc)
 
 
     plus <- connect_to_tbdbplus()

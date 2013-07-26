@@ -9,16 +9,15 @@
 
 
 query_visits <- function(start_date,
-                         stop_date = Sys.Date(),
-                         odbc = "tbdbplus64") {
+                         stop_date = Sys.Date()) {
 
     # TODO: argument validation
 
     require(RODBC)
 
-    dbconnect <- odbcConnect(odbc)
+    plus <- connect_to_tbdbplus()
 
-    encounters <- sqlQuery(dbconnect, paste(
+    encounters <- sqlQuery(plus, paste(
         "SELECT person_id, 
                 eval_date AS visit_date,
                 visit_location, 
@@ -40,7 +39,7 @@ query_visits <- function(start_date,
 
 
 
-    dots <- sqlQuery(dbconnect, paste(
+    dots <- sqlQuery(plus, paste(
         "SELECT person_id, 
                 treatment_date AS visit_date, 
                 dispense_type,
@@ -62,7 +61,7 @@ query_visits <- function(start_date,
     )
 
 
-#    pickups <- sqlQuery(dbconnect, paste(
+#    pickups <- sqlQuery(plus, paste(
 #        "SELECT person_id, 
 #                treatment_date AS visit_date, 
 #                dispense_type, 
@@ -85,7 +84,7 @@ query_visits <- function(start_date,
 
 
 
-    odbcClose(dbconnect)
+    odbcClose(plus)
 
 
     # For reporting, we generally want just one visit per day, even if a person

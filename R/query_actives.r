@@ -9,8 +9,6 @@
 #' 
 #' @param start_date The earliest identification date to retrieve
 #' @param end_date The latest identification date to retrieve
-#' @param odbc A valid odbcConnect object connecting to TBdbPlus
-#'        (see the \link{\code{connect_to_tbdbplus}} function)
 #' 
 #' @export
 #' 
@@ -18,17 +16,15 @@
 #' 
 
 
-query_actives <- function(start_date, 
-                          end_date = Sys.Date(),
-                          odbc = plus) {
+query_actives <- function(start_date, end_date = Sys.Date()) {
 
     # TODO: argument validation
 
     require(RODBC)
 
-    dbconnect <- odbcConnect(odbc)
+    plus <- connect_to_tbdbplus()
 
-    actives <- sqlQuery(dbconnect, "
+    actives <- sqlQuery(plus, "
 
         SELECT mrn,
                person_id, 
@@ -43,7 +39,7 @@ query_actives <- function(start_date,
 
     ")
 
-    odbcClose(dbconnect)
+    odbcClose(plus)
 
 
     # Convert the dates to Dates - POSIXct is overly complicated here

@@ -14,16 +14,15 @@ options(stringsAsFactors = FALSE)
 
 
 query_tx_plans <- function(start_date,
-                           stop_date = Sys.Date(),
-                           odbc = "tbdbplus64") {
+                           stop_date = Sys.Date()) {
 
     # TODO: argument validation
 
     require(RODBC)
 
-    dbconnect <- odbcConnect(odbc)
+    plus <- connect_to_tbdbplus()
 
-    plans <- sqlQuery(dbconnect, paste(
+    plans <- sqlQuery(plus, paste(
         "SELECT person_id,
                 treat_plan,
                 treat_plan_type,
@@ -44,7 +43,7 @@ query_tx_plans <- function(start_date,
         sep = "")
     )
 
-    odbcClose(dbconnect)
+    odbcClose(plus)
 
 
     # Add month-, quarter-, and year-of-plan variables for ease of aggregation

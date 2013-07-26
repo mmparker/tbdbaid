@@ -13,21 +13,22 @@
 #' @param end_date Latest collection date of QFTs to return
 #' @param hosp_serv The hospital service code of the QFTs you'd like to
 #'        retrieve (defaults to "TBC")
-#' @param odbc A valid odbcConnect object connecting to the DH Data Warehouse
-
+#' 
+#' @export
+#' 
+#' 
 
 
 query_dhdw_qfts <- function(start_date,
                             end_date,
-                            hosp_serv = "TBC",
-                            odbc = "dhdw64") {
+                            hosp_serv = "TBC") {
 
 
     require(RODBC)
     require(reshape2)
 
     # Connect to the DHDW
-    dhdw <- odbcConnect(odbc)
+    dhdw <- connect_to_dhdw()
 
     # Pull in the raw QFT records
     # TODO: limit by dates

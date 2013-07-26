@@ -27,18 +27,16 @@ options(stringsAsFactors = FALSE)
 
 
 
-query_tests <- function(start_date,
-                        stop_date = Sys.Date(),
-                        odbc = "tbdbplus64") {
+query_tests <- function(start_date, stop_date = Sys.Date()) {
 
     # TODO: argument validation
 
     require(RODBC)
     require(reshape2)
 
-    dbconnect <- odbcConnect(odbc)
+    plus <- connect_to_tbdbplus()
 
-    tsts <- sqlQuery(dbconnect, paste(
+    tsts <- sqlQuery(plus, paste(
         "SELECT DISTINCT person_id, 
                 date_given AS test_date,
                 result, 
@@ -61,7 +59,7 @@ query_tests <- function(start_date,
 
 
 
-    qfts <- sqlQuery(dbconnect, "
+    qfts <- sqlQuery(plus, "
         SELECT DISTINCT person_id,
                collection_date,
                result
@@ -71,7 +69,7 @@ query_tests <- function(start_date,
     ")
 
 
-    cxrs <- sqlQuery(dbconnect, paste(
+    cxrs <- sqlQuery(plus, paste(
         "SELECT DISTINCT person_id,
                 cxr_date_taken AS test_date,
                 abnormal AS result
@@ -87,7 +85,7 @@ query_tests <- function(start_date,
 
 
 
-    odbcClose(dbconnect)
+    odbcClose(plus)
 
 
     # Convert QFT collection dates into proper Dates
