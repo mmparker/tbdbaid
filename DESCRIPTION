@@ -19,3 +19,4 @@ Collate:
     'query_tx_plans.r'
     'query_visits.r'
     'connect_to_tbdbplus.r'
+    'connect_to_dhdw.r'

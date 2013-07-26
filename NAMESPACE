@@ -1,3 +1,5 @@
+export(connect_to_dhdw)
 export(connect_to_tbdbplus)
 export(count_patients)
 export(query_actives)
+export(query_dhdw_qfts)
