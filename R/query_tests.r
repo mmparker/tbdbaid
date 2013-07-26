@@ -22,11 +22,6 @@
 #' 
 
 
-# Strings ain't factors
-options(stringsAsFactors = FALSE)
-
-
-
 query_tests <- function(start_date, stop_date = Sys.Date()) {
 
     # TODO: argument validation
