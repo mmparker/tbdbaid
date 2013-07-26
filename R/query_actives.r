@@ -1,14 +1,26 @@
-
-# This function provides a standardized method for querying 
-# reported active cases
-# along with the TBdb IDs, MRNs, names, DOBs, county of report, 
-# treatment start date, and official CDC report date.
-# It will probably be expanded to include more/most of the RVCT details.
+#' Get basic info on active cases identified during a given period.
+#' 
+#' This function queries basic information on all active cases identified
+#' during a given period. "Identified" here means specifically the earlier of
+#' a cases treatment start date and report date - so cases that have a delayed
+#' report will still be given a date reasonably close to their initial 
+#' identification, while cases that never start treatment (usually, those who
+#' die shortly before or after diagnosis) will still have an approximate date.
+#' 
+#' @param start_date The earliest identification date to retrieve
+#' @param end_date The latest identification date to retrieve
+#' @param odbc A valid odbcConnect object connecting to TBdbPlus
+#'        (see the \link{\code{connect_to_tbdbplus}} function)
+#' 
+#' @export
+#' 
+#' 
+#' 
 
 
 query_actives <- function(start_date, 
-                          stop_date = Sys.Date(),
-                          odbc = "tbdbplus64") {
+                          end_date = Sys.Date(),
+                          odbc = plus) {
 
     # TODO: argument validation
 
@@ -65,7 +77,7 @@ query_actives <- function(start_date,
     # Subset to active cases in the requested date range
     queried_actives <- subset(actives, 
                               date_id >= start_date &
-                              date_id <= stop_date)
+                              date_id <= end_date)
 
     queried_actives
 

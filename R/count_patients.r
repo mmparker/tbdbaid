@@ -1,4 +1,21 @@
-
+#' Count the total number of patients seen between two dates.
+#' 
+#' This function counts the number of all patients seen between the given dates;
+#' specifically, any individual with a TST, QFT, encounter, or treatment during
+#' the period is counted.
+#' 
+#' @param start_date The first Date on which to count patients
+#' @param end_date The last Date on which to count patients
+#' 
+#' @return The number of patients seen in the indicated period.
+#' 
+#' @export
+#' 
+#' @examples
+#' # Number of patients seen in the last thirty days
+#' count_patients(start_date = Sys.Date() - 30,
+#'                end_date = Sys.Date())
+#' 
 
 
 

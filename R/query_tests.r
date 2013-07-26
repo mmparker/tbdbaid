@@ -1,10 +1,25 @@
 
 
 
-# This function provides a standardized method for querying 
-# common diagnostics - TSTs, QFTs, and CXRs
-# including date and result.
 
+#' Query TSTs, QFTs, and CXRs from TBdb.
+#' 
+#' This function provides a standardized method for querying 
+#' common diagnostics - TSTs, QFTs, and CXRs
+#' including date and result.
+#' 
+#' @param start_date The first Date on which to count patients
+#' @param end_date The last Date on which to count patients
+#' 
+#' @return The number of patients seen in the indicated period.
+#' 
+#' @export
+#' 
+#' @examples
+#' # Number of patients seen in the last thirty days
+#' count_patients(start_date = Sys.Date() - 30,
+#'                end_date = Sys.Date())
+#' 
 
 
 # Strings ain't factors

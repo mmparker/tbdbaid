@@ -11,13 +11,11 @@
 #' 
 #' @param start_date Earliest collection date of QFTs to return
 #' @param end_date Latest collection date of QFTs to return
-#' @param odbc Name of the local ODBC connection to the DHDW
+#' @param hosp_serv The hospital service code of the QFTs you'd like to
+#'        retrieve (defaults to "TBC")
+#' @param odbc A valid odbcConnect object connecting to the DH Data Warehouse
 
 
-start_date <- as.Date("2012-01-01")
-end_date <- as.Date("2012-12-31")
-hosp_serv <- "TBC"
-odbc <- "dhdw64"
 
 query_dhdw_qfts <- function(start_date,
                             end_date,

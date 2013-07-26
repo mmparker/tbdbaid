@@ -10,3 +10,9 @@ Suggests:
     roxygen2
 Collate:
     'tbdbaid-package.r'
+    'count_patients.r'
+    'query_actives.r'
+    'query_dhdw_qfts.r'
+    'query_tests.r'
+    'query_tx_plans.r'
+    'query_visits.r'
