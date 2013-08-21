@@ -59,6 +59,7 @@ query_tests <- function(start_date, stop_date = Sys.Date()) {
                result
         FROM QFT_View
         WHERE lab = 'Denver Public Health'
+            AND collection_date IS NOT NULL
 
     ")
 
