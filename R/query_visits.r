@@ -32,7 +32,7 @@ query_visits <- function(start_date,
              AND eval_date BETWEEN #",
              start_date, 
              "# AND #",
-             stop_date,
+             end_date,
              "#",
         sep = "")
     )
@@ -55,7 +55,7 @@ query_visits <- function(start_date,
              AND treatment_date BETWEEN #",
              start_date, 
              "# AND #",
-             stop_date,
+             end_date,
              "#",
         sep = "")
     )
