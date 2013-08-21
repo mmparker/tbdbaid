@@ -52,6 +52,11 @@ query_tx_plans <- function(start_date,
     odbcClose(plus)
 
 
+    # Convert dates to Dates
+    plans$treat_plan_date <- as.Date(plans$treat_plan_date)
+    plans$treat_plan_end <- as.Date(plans$treat_plan_end)
+
+
     # Add month-, quarter-, and year-of-plan variables for ease of aggregation
     plans$plan_mon <- as.character(
         format(plans$treat_plan_date, format = "%m")
