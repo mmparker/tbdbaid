@@ -27,7 +27,7 @@ query_latest_plans <- function(start_date,
 
     # Query all treatment plans
     plans <- query_tx_plans(start_date = start_date, 
-                            stop_date = stop_date)
+                            stop_date = Sys.Date())
 
     
     # Select the most recent plan for each person
