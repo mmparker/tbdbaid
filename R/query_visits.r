@@ -1,15 +1,19 @@
-
-
-# This function provides a standardized method for querying 
-# visits (face-to-face encounters and drug treatments)
-# including visit date, location, and staff responsible.
-# It will probably be expanded to include demographic details later, if
-# needed for reporting
-
-
+#' Query visits from TBdb
+#' 
+#' This function queries patient visits (face-to-face encounters and 
+#' directly-observed drug treatments) from TBdb for a given period.
+#' The results include visit date, location, and the staff member responsible.
+#' 
+#' @param start_date The earliest visit date to retrieve
+#' @param end_date The latest visit date to retrieve
+#' 
+#' @export
+#' 
+#' 
+#' 
 
 query_visits <- function(start_date,
-                         stop_date = Sys.Date()) {
+                         end_date = Sys.Date()) {
 
     plus <- connect_to_tbdbplus()
 
@@ -55,28 +59,6 @@ query_visits <- function(start_date,
              "#",
         sep = "")
     )
-
-
-#    pickups <- sqlQuery(plus, paste(
-#        "SELECT person_id, 
-#                treatment_date AS visit_date, 
-#                dispense_type, 
-#                staff AS staff_tx
-#         FROM Drug_Treatment
-#         WHERE dispense_type IN ('Pickup')
-#             AND completed = 'Completed'
-#             AND staff IN (
-#                 SELECT staff_name
-#                 FROM Def_staff
-#                 WHERE affiliation = 'Denver Metro TB Clinic'
-#                 )
-#             AND treatment_date BETWEEN #",
-#             start_date, 
-#             "# AND #",
-#             stop_date,
-#             "#",
-#        sep = "")
-#    )
 
 
 
