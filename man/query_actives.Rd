@@ -2,13 +2,13 @@
 \alias{query_actives}
 \title{Get basic info on active cases identified during a given period.}
 \usage{
-  query_actives(start_date, end_date = Sys.Date())
+  query_actives(start_date, stop_date = Sys.Date())
 }
 \arguments{
   \item{start_date}{The earliest identification date to
   retrieve}
 
-  \item{end_date}{The latest identification date to
+  \item{stop_date}{The latest identification date to
   retrieve}
 }
 \description{

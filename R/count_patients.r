@@ -5,7 +5,7 @@
 #' the period is counted.
 #' 
 #' @param start_date The first Date on which to count patients
-#' @param end_date The last Date on which to count patients
+#' @param stop_date The last Date on which to count patients
 #' 
 #' @return The number of patients seen in the indicated period.
 #' 
@@ -14,12 +14,12 @@
 #' @examples
 #' # Number of patients seen in the last thirty days
 #' count_patients(start_date = Sys.Date() - 30,
-#'                end_date = Sys.Date())
+#'                stop_date = Sys.Date())
 #' 
 
 
 
-count_patients <- function(start_date, end_date) {
+count_patients <- function(start_date, stop_date) {
 
     plus <- connect_to_tbdbplus()
 
@@ -32,7 +32,7 @@ count_patients <- function(start_date, end_date) {
         WHERE date_given BETWEEN #",
         start_date,
         "# AND #",
-        end_date,
+        stop_date,
         "#",
         sep = "")
 
@@ -55,7 +55,7 @@ count_patients <- function(start_date, end_date) {
         AND eval_date BETWEEN #",
         start_date,
         "# AND #",
-        end_date,
+        stop_date,
         "#",
         sep = "")
 
@@ -70,7 +70,7 @@ count_patients <- function(start_date, end_date) {
         AND treatment_date BETWEEN #",
         start_date,
         "# AND #",
-        end_date,
+        stop_date,
         "#",
         sep = "")
 
@@ -87,7 +87,7 @@ count_patients <- function(start_date, end_date) {
 
     # Subset the QFTs to the report period
     qfts <- qfts_all[qfts_all$c_date >= as.Date(start_date) & 
-                     qfts_all$c_date <= as.Date(end_date), ]
+                     qfts_all$c_date <= as.Date(stop_date), ]
 
 
     # Count the unique patients

@@ -10,7 +10,7 @@
 #' Some QFT records
 #' 
 #' @param start_date Earliest collection date of QFTs to return
-#' @param end_date Latest collection date of QFTs to return
+#' @param stop_date Latest collection date of QFTs to return
 #' @param hosp_serv The hospital service code of the QFTs you'd like to
 #'        retrieve (defaults to "TBC")
 #' 
@@ -20,7 +20,7 @@
 
 
 query_dhdw_qfts <- function(start_date,
-                            end_date,
+                            stop_date,
                             hosp_serv = "TBC") {
 
     # Initialize these variables to prevent global var warnings from R CMD check

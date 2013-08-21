@@ -18,7 +18,7 @@
 #' @examples
 #' # Number of patients seen in the last thirty days
 #' count_patients(start_date = Sys.Date() - 30,
-#'                end_date = Sys.Date())
+#'                stop_date = Sys.Date())
 #' 
 
 

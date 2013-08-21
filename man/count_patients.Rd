@@ -2,13 +2,14 @@
 \alias{count_patients}
 \title{Count the total number of patients seen between two dates.}
 \usage{
-  count_patients(start_date, end_date)
+  count_patients(start_date, stop_date)
 }
 \arguments{
   \item{start_date}{The first Date on which to count
   patients}
 
-  \item{end_date}{The last Date on which to count patients}
+  \item{stop_date}{The last Date on which to count
+  patients}
 }
 \value{
   The number of patients seen in the indicated period.
@@ -22,6 +23,6 @@
 \examples{
 # Number of patients seen in the last thirty days
 count_patients(start_date = Sys.Date() - 30,
-               end_date = Sys.Date())
+               stop_date = Sys.Date())
 }
 

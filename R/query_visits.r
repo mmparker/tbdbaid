@@ -5,7 +5,7 @@
 #' The results include visit date, location, and the staff member responsible.
 #' 
 #' @param start_date The earliest visit date to retrieve
-#' @param end_date The latest visit date to retrieve
+#' @param stop_date The latest visit date to retrieve
 #' 
 #' @export
 #' 
@@ -13,7 +13,7 @@
 #' 
 
 query_visits <- function(start_date,
-                         end_date = Sys.Date()) {
+                         stop_date = Sys.Date()) {
 
     plus <- connect_to_tbdbplus()
 
@@ -32,7 +32,7 @@ query_visits <- function(start_date,
              AND eval_date BETWEEN #",
              start_date, 
              "# AND #",
-             end_date,
+             stop_date,
              "#",
         sep = "")
     )
@@ -55,7 +55,7 @@ query_visits <- function(start_date,
              AND treatment_date BETWEEN #",
              start_date, 
              "# AND #",
-             end_date,
+             stop_date,
              "#",
         sep = "")
     )

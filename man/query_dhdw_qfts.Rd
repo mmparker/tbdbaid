@@ -2,13 +2,14 @@
 \alias{query_dhdw_qfts}
 \title{Query QFT records from the Denver Health Data Warehouse}
 \usage{
-  query_dhdw_qfts(start_date, end_date, hosp_serv = "TBC")
+  query_dhdw_qfts(start_date, stop_date, hosp_serv = "TBC")
 }
 \arguments{
   \item{start_date}{Earliest collection date of QFTs to
   return}
 
-  \item{end_date}{Latest collection date of QFTs to return}
+  \item{stop_date}{Latest collection date of QFTs to
+  return}
 
   \item{hosp_serv}{The hospital service code of the QFTs
   you'd like to retrieve (defaults to "TBC")}

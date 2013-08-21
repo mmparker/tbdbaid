@@ -8,7 +8,7 @@
 #' die shortly before or after diagnosis) will still have an approximate date.
 #' 
 #' @param start_date The earliest identification date to retrieve
-#' @param end_date The latest identification date to retrieve
+#' @param stop_date The latest identification date to retrieve
 #' 
 #' @export
 #' 
@@ -16,7 +16,7 @@
 #' 
 
 
-query_actives <- function(start_date, end_date = Sys.Date()) {
+query_actives <- function(start_date, stop_date = Sys.Date()) {
 
     plus <- connect_to_tbdbplus()
 
@@ -68,7 +68,7 @@ query_actives <- function(start_date, end_date = Sys.Date()) {
 
     # Subset to active cases in the requested date range
     queried_actives <- actives[actives$date_id >= start_date &
-                               actives$date_id <= end_date, ]
+                               actives$date_id <= stop_date, ]
 
 
     queried_actives
