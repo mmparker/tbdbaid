@@ -1,10 +1,10 @@
 
 
 
-#' Query treatment plan statuses from TBdb
+#' Query all treatment plans from TBdb
 #' 
 #' This function provides a standardized method for querying 
-#' treatment plan status
+#' all treatment plan statuses (including multiples per patient) from TBdb,
 #' including plan type, plan author, start date, end date (if completed),
 #' reason stopped, plan author, and number of treatments completed
 #' 
@@ -64,28 +64,20 @@ query_tx_plans <- function(start_date,
     plans$plan_qtr <- (as.numeric(plans$plan_mon) + 2) %/% 3
 
 
-
-    
-    # Select the most recent plan for each person
-    latest_plan <- plans[!duplicated(plans$person_id), ]
-
-
-
     # Add month-, quarter-, and year-of-plan variables for ease of aggregation
-    latest_plan$plan_mon <- as.character(
-        format(latest_plan$treat_plan_date, format = "%m")
+    plans$plan_mon <- as.character(
+        format(plans$treat_plan_date, format = "%m")
     )
 
-    latest_plan$plan_yr <- as.character(
-        format(latest_plan$treat_plan_date, format = "%Y")
+    plans$plan_yr <- as.character(
+        format(plans$treat_plan_date, format = "%Y")
     )
 
-    latest_plan$plan_qtr <- (as.numeric(latest_plan$plan_mon) + 2) %/% 3
+    plans$plan_qtr <- (as.numeric(plans$plan_mon) + 2) %/% 3
 
 
-    # Return each individual's latest plan, if it started on or before
-    # the stop date
-    latest_plan[as.Date(latest_plan$treat_plan_date) <= stop_date, ]
+    # Return all plans started on or before the stop date
+    plans[as.Date(plans$treat_plan_date) <= stop_date, ]
 
 
 }

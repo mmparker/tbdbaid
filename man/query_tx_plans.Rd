@@ -1,6 +1,6 @@
 \name{query_tx_plans}
 \alias{query_tx_plans}
-\title{Query treatment plan statuses from TBdb}
+\title{Query all treatment plans from TBdb}
 \usage{
   query_tx_plans(start_date, stop_date = Sys.Date())
 }
@@ -13,7 +13,8 @@
 }
 \description{
   This function provides a standardized method for querying
-  treatment plan status including plan type, plan author,
+  all treatment plan statuses (including multiples per
+  patient) from TBdb, including plan type, plan author,
   start date, end date (if completed), reason stopped, plan
   author, and number of treatments completed
 }
