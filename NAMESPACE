@@ -1,3 +1,4 @@
+export(add_county)
 export(connect_to_dhdw)
 export(connect_to_tbdbplus)
 export(count_patients)
