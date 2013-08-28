@@ -36,7 +36,8 @@ query_tests <- function(start_date, stop_date = Sys.Date()) {
                 result, 
                 tst_read_by,
                 reader_affiliation,
-                pt_agency
+                pt_agency,
+                project_type
          FROM TST_View
          WHERE external_clinic = ''
             AND (reader_affiliation = 'Denver Metro TB Clinic'
@@ -56,7 +57,8 @@ query_tests <- function(start_date, stop_date = Sys.Date()) {
     qfts <- sqlQuery(plus, "
         SELECT DISTINCT person_id,
                collection_date,
-               result
+               result,
+               project_type
         FROM QFT_View
         WHERE lab = 'Denver Public Health'
             AND collection_date IS NOT NULL
@@ -67,7 +69,8 @@ query_tests <- function(start_date, stop_date = Sys.Date()) {
     cxrs <- sqlQuery(plus, paste(
         "SELECT DISTINCT person_id,
                 cxr_date_taken AS test_date,
-                abnormal AS result
+                abnormal AS result,
+                NULL AS project_type
          FROM CXR_View
          WHERE cxr_lab_affiliation = 'Denver Metro TB Clinic'
              AND cxr_date_taken BETWEEN #",
@@ -108,20 +111,22 @@ query_tests <- function(start_date, stop_date = Sys.Date()) {
     cxrs$seq_id <- seq_along(cxrs$person_id)
 
     # Combine into a single data.frame for ease of plotting
-    tests <- rbind(dcast(melt(tsts, 
-                              id.vars = c("person_id", "test_date", "seq_id"),
-                              measure.vars = c("test", "result")),
-                         person_id + test_date + seq_id ~ variable),
+    tests <- rbind(
 
-                   dcast(melt(qfts_datelim, 
-                              id.vars = c("person_id", "test_date", "seq_id"),
-                              measure.vars = c("test", "result")),
-                         person_id + test_date + seq_id ~ variable),
+               dcast(melt(tsts, 
+                          id.vars = c("person_id", "test_date", "seq_id"),
+                          measure.vars = c("test", "project_type", "result")),
+                     person_id + test_date + seq_id ~ variable),
 
-                   dcast(melt(cxrs, 
-                              id.vars = c("person_id", "test_date", "seq_id"),
-                              measure.vars = c("test", "result")),
-                         person_id + test_date + seq_id ~ variable)
+               dcast(melt(qfts_datelim, 
+                          id.vars = c("person_id", "test_date", "seq_id"),
+                          measure.vars = c("test", "project_type", "result")),
+                     person_id + test_date + seq_id ~ variable),
+
+               dcast(melt(cxrs, 
+                          id.vars = c("person_id", "test_date", "seq_id"),
+                          measure.vars = c("test", "project_type", "result")),
+                     person_id + test_date + seq_id ~ variable)
 
     )
 
