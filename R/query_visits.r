@@ -18,18 +18,20 @@ query_visits <- function(start_date,
     plus <- connect_to_tbdbplus()
 
     encounters <- sqlQuery(plus, paste(
-        "SELECT person_id, 
-                eval_date AS visit_date,
-                visit_location, 
-                staff_responsible AS staff_enc
-         FROM Medical_Eval
+        "SELECT e.person_id, 
+                e.eval_date AS visit_date,
+                e.visit_location, 
+                d.visit_reason_label AS visit_reason,
+                e.staff_responsible AS staff_enc
+         FROM Medical_Eval e LEFT OUTER JOIN Def_Visit_reason d
+         ON e.reason = d.visit_reason
          WHERE eval_type in (1, 4)
-             AND staff_responsible IN (
+             AND e.staff_responsible IN (
                  SELECT staff_name
                  FROM Def_staff
                  WHERE affiliation = 'Denver Metro TB Clinic'
                  )
-             AND eval_date BETWEEN #",
+             AND e.eval_date BETWEEN #",
              start_date, 
              "# AND #",
              stop_date,
