@@ -2,7 +2,7 @@
 \alias{query_dhdw_qfts}
 \title{Query QFT records from the Denver Health Data Warehouse}
 \usage{
-  query_dhdw_qfts(start_date, stop_date, hosp_serv = "TBC")
+query_dhdw_qfts(start_date, stop_date, hosp_serv = "TBC")
 }
 \arguments{
   \item{start_date}{Earliest collection date of QFTs to
@@ -15,11 +15,11 @@
   you'd like to retrieve (defaults to "TBC")}
 }
 \value{
-  Some QFT records
+Some QFT records
 }
 \description{
-  This function returns Quantiferon results form the Denver
-  Health Data Warehouse. If you don't have access to the
-  DHDW, it won't obviously won't work...
+This function returns Quantiferon results form the Denver
+Health Data Warehouse. If you don't have access to the
+DHDW, it won't obviously won't work...
 }
 

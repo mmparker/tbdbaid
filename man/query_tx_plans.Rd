@@ -2,7 +2,7 @@
 \alias{query_tx_plans}
 \title{Query all treatment plans from TBdb}
 \usage{
-  query_tx_plans(start_date, stop_date = Sys.Date())
+query_tx_plans(start_date, stop_date = Sys.Date())
 }
 \arguments{
   \item{start_date}{The start date of the earliest
@@ -12,11 +12,11 @@
   plans to query}
 }
 \description{
-  This function provides a standardized method for querying
-  all treatment plan statuses (including multiples per
-  patient) from TBdb, including plan type, plan author,
-  start date, end date (if completed), reason stopped, plan
-  author, and number of treatments completed
+This function provides a standardized method for querying
+all treatment plan statuses (including multiples per
+patient) from TBdb, including plan type, plan author, start
+date, end date (if completed), reason stopped, plan author,
+and number of treatments completed
 }
 \examples{
 # Query all treatment plans started in the last week
