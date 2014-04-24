@@ -33,13 +33,16 @@ query_dhdw_qfts <- function(start_date,
     # Pull in the raw QFT records
     qfts.raw <- sqlQuery(dhdw, "
 
-        SELECT med_rec_no AS mrn, 
-               obsv_trans_id AS qft_id,
-               obsv_dtime AS qft_dt, 
-               obsv_rslt_text AS res_txt
-        FROM lcr_ods.dbo.LCR_observation_v WITH(nolock)
-        WHERE obsv_term_no IN (100693,100694)
-        ORDER BY med_rec_no, obsv_dtime
+        SELECT lcr.med_rec_no AS mrn, 
+               vst.hosp_svc,
+               lcr.obsv_trans_id AS qft_id,
+               lcr.obsv_dtime AS qft_dt, 
+               lcr.obsv_rslt_text AS res_txt
+        FROM lcr_ods.dbo.LCR_observation_v lcr
+        LEFT OUTER JOIN dhdcdtw.smsmir.mir_vst vst
+        ON CAST(lcr.pt_id AS INTEGER) = CAST(vst.pt_id AS INTEGER)
+        WHERE lcr.obsv_term_no IN (100693,100694)
+        ORDER BY lcr.med_rec_no, lcr.obsv_dtime
 
     ", stringsAsFactors = FALSE)
 
@@ -81,7 +84,7 @@ query_dhdw_qfts <- function(start_date,
 
     # Cast wide, excluding duplicate lines
     dhdw.qfts <- dcast(unique(subset(qfts.raw, !is.na(result.type))),
-                       mrn + qft_id + qft_dt ~ result.type, 
+                       mrn + qft_id + qft_dt + hosp_svc ~ result.type, 
                        value.var = "result")
 
 
