@@ -10,9 +10,9 @@
 #' Some QFT records
 #' 
 #' @param start_date Earliest collection date of QFTs to return
-#' @param stop_date Latest collection date of QFTs to return
+#' @param stop_date Latest collection date of QFTs to return (defaults to the current date)
 #' @param hosp_serv The hospital service code of the QFTs you'd like to
-#'        retrieve (defaults to "TBC")
+#'        retrieve. For example, to return only QFTs from the TB and ID Clinics, set \code{hosp_svc = c("TBC", "IDC")}. All QFTs are returned by default. 
 #' 
 #' @export
 #' 
