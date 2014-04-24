@@ -21,7 +21,7 @@
 
 query_dhdw_qfts <- function(start_date,
                             stop_date,
-                            hosp_serv = "TBC") {
+                            hosp_svc) {
 
     # Initialize these variables to prevent global var warnings from R CMD check
     result.type <- NULL
@@ -34,7 +34,7 @@ query_dhdw_qfts <- function(start_date,
     qfts.raw <- sqlQuery(dhdw, "
 
         SELECT lcr.med_rec_no AS mrn, 
-               vst.hosp_svc,
+               LTRIM(RTRIM(vst.hosp_svc)) AS hosp_svc,
                lcr.obsv_trans_id AS qft_id,
                lcr.obsv_dtime AS qft_dt, 
                lcr.obsv_rslt_text AS res_txt
@@ -102,8 +102,11 @@ query_dhdw_qfts <- function(start_date,
                                           replacement = ""))
 
 
-    # Return those QFTs
-    dhdw.qfts
+    # If a particular service or services have been requsted,
+    # return just those QFTs; otherwise, return all
+    if(missing(hosp_svc)) {
+        return(dhdw.qfts) } else { 
+            return(dhdw.qfts[dhdw.qfts$hosp_svc %in% hosp_svc, ]) }
 
 
 
