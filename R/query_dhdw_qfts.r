@@ -20,8 +20,12 @@
 
 
 query_dhdw_qfts <- function(start_date,
-                            stop_date,
+                            stop_date = Sys.Date(),
                             hosp_svc) {
+
+
+    # Check for missing start_date
+    if(missing(start_date)) { stop('You must specify a start date for the query (e.g., as.Date("2010-01-01") ).') }
 
     # Initialize these variables to prevent global var warnings from R CMD check
     result.type <- NULL
@@ -31,20 +35,30 @@ query_dhdw_qfts <- function(start_date,
     dhdw <- connect_to_dhdw()
 
     # Pull in the raw QFT records
-    qfts.raw <- sqlQuery(dhdw, "
+    qfts.raw <- sqlQuery(dhdw, paste0("
 
-        SELECT lcr.med_rec_no AS mrn, 
-               LTRIM(RTRIM(vst.hosp_svc)) AS hosp_svc,
-               lcr.obsv_trans_id AS qft_id,
-               lcr.obsv_dtime AS qft_dt, 
-               lcr.obsv_rslt_text AS res_txt
-        FROM lcr_ods.dbo.LCR_observation_v lcr
-        LEFT OUTER JOIN dhdcdtw.smsmir.mir_vst vst
-        ON CAST(lcr.pt_id AS INTEGER) = CAST(vst.pt_id AS INTEGER)
-        WHERE lcr.obsv_term_no IN (100693,100694)
-        ORDER BY lcr.med_rec_no, lcr.obsv_dtime
+            SELECT lcr.med_rec_no AS mrn, 
+                   LTRIM(RTRIM(vst.hosp_svc)) AS hosp_svc,
+                   lcr.obsv_trans_id AS qft_id,
+                   lcr.obsv_dtime AS qft_dt, 
+                   lcr.obsv_rslt_text AS res_txt
+            FROM lcr_ods.dbo.LCR_observation_v lcr
+            LEFT OUTER JOIN dhdcdtw.smsmir.mir_vst vst
+            ON CAST(lcr.pt_id AS INTEGER) = CAST(vst.pt_id AS INTEGER)
+            WHERE lcr.obsv_term_no IN (100693,100694)
+                AND CONVERT(date, lcr.obsv_dtime) BETWEEN '",
+            start_date,
+            "' AND '",
+            stop_date,
+            "'",
+            "ORDER BY lcr.med_rec_no, lcr.obsv_dtime"
 
-    ", stringsAsFactors = FALSE)
+            ),
+
+        stringsAsFactors = FALSE
+    )
+
+    head(qfts.raw)
 
 
     odbcClose(dhdw)
